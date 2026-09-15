@@ -1,0 +1,241 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "ArcGIS",
+        "importPath": "geopy.geocoders",
+        "description": "geopy.geocoders",
+        "isExtraImport": true,
+        "detail": "geopy.geocoders",
+        "documentation": {}
+    },
+    {
+        "label": "openmeteo_requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "openmeteo_requests",
+        "description": "openmeteo_requests",
+        "detail": "openmeteo_requests",
+        "documentation": {}
+    },
+    {
+        "label": "requests_cache",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests_cache",
+        "description": "requests_cache",
+        "detail": "requests_cache",
+        "documentation": {}
+    },
+    {
+        "label": "retry",
+        "importPath": "retry_requests",
+        "description": "retry_requests",
+        "isExtraImport": true,
+        "detail": "retry_requests",
+        "documentation": {}
+    },
+    {
+        "label": "ephem",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "ephem",
+        "description": "ephem",
+        "detail": "ephem",
+        "documentation": {}
+    },
+    {
+        "label": "registrar_erro",
+        "kind": 2,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "def registrar_erro(mensagem):\n    agora = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    with open(ARQUIVO_LOG, 'a', encoding='utf-8') as f:\n        f.write(f\"[{agora}] {mensagem}\\n\")\ndef formatar_data_api(ano, mes, dia):\n    try:\n        ano_str = str(int(float(ano)))\n        if int(ano_str) < 1940: return None\n        mes_limpo = str(mes).strip().lower()\n        mes_str = MESES_MAP.get(mes_limpo[:3], None)",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "formatar_data_api",
+        "kind": 2,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "def formatar_data_api(ano, mes, dia):\n    try:\n        ano_str = str(int(float(ano)))\n        if int(ano_str) < 1940: return None\n        mes_limpo = str(mes).strip().lower()\n        mes_str = MESES_MAP.get(mes_limpo[:3], None)\n        if not mes_str:\n            if mes_limpo.isdigit(): mes_str = mes_limpo.zfill(2)\n            else: return None\n        dia_limpo = str(dia).strip().lower()",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "buscar_coordenadas_robustas",
+        "kind": 2,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "def buscar_coordenadas_robustas(localidade, estado, pais):\n    loc = localidade if str(localidade).lower() != 'unknown' else \"\"\n    est = estado if str(estado).lower() != 'unknown' else \"\"\n    pai = pais if str(pais).lower() != 'unknown' else \"\"\n    buscas = []\n    if loc and est and pai: buscas.append(f\"{loc}, {est}, {pai}\")\n    if loc and pai: buscas.append(f\"{loc}, {pai}\")\n    if est and pai: buscas.append(f\"{est}, {pai}\")\n    buscas = list(dict.fromkeys(buscas))\n    for string_busca in buscas:",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "buscar_clima_historico",
+        "kind": 2,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "def buscar_clima_historico(lat, lon, data_formatada):\n    while True:\n        try:\n            url_archive = \"https://archive-api.open-meteo.com/v1/archive\"\n            params_archive = {\n                \"latitude\": lat, \n                \"longitude\": lon,\n                \"start_date\": data_formatada, \n                \"end_date\": data_formatada,\n                \"daily\": [\"temperature_2m_mean\", \"precipitation_sum\", \"wind_speed_10m_max\", \"wind_direction_10m_dominant\"]",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "processar_base",
+        "kind": 2,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "def processar_base():\n    if not os.path.exists(ARQUIVO_ENTRADA): \n        print(f\"[-] Erro: {ARQUIVO_ENTRADA} não encontrado.\")\n        return\n    df_original = pd.read_csv(ARQUIVO_ENTRADA)\n    total_linhas = len(df_original)\n    linhas_completadas = 0\n    if os.path.exists(ARQUIVO_SAIDA):\n        df_progresso = pd.read_csv(ARQUIVO_SAIDA)\n        linhas_completadas = len(df_progresso)",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "ARQUIVO_ENTRADA",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "ARQUIVO_ENTRADA = \"GSAF_clean.csv\"\nARQUIVO_SAIDA = \"GSAF_clima.csv\" # Nome novo para a base padronizada\nARQUIVO_LOG = \"erros_mineracao.txt\"\ncache_session = requests_cache.CachedSession('.cache_weather', expire_after=86400)\nretry_session = retry(cache_session, retries=3, backoff_factor=1)\nopenmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "ARQUIVO_SAIDA",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "ARQUIVO_SAIDA = \"GSAF_clima.csv\" # Nome novo para a base padronizada\nARQUIVO_LOG = \"erros_mineracao.txt\"\ncache_session = requests_cache.CachedSession('.cache_weather', expire_after=86400)\nretry_session = retry(cache_session, retries=3, backoff_factor=1)\nopenmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "ARQUIVO_LOG",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "ARQUIVO_LOG = \"erros_mineracao.txt\"\ncache_session = requests_cache.CachedSession('.cache_weather', expire_after=86400)\nretry_session = retry(cache_session, retries=3, backoff_factor=1)\nopenmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "cache_session",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "cache_session = requests_cache.CachedSession('.cache_weather', expire_after=86400)\nretry_session = retry(cache_session, retries=3, backoff_factor=1)\nopenmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}\ndef registrar_erro(mensagem):",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "retry_session",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "retry_session = retry(cache_session, retries=3, backoff_factor=1)\nopenmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}\ndef registrar_erro(mensagem):\n    agora = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "openmeteo",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "openmeteo = openmeteo_requests.Client(session=retry_session)\ngeolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}\ndef registrar_erro(mensagem):\n    agora = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    with open(ARQUIVO_LOG, 'a', encoding='utf-8') as f:",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "geolocator",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "geolocator = ArcGIS(user_agent=\"sharkguard_tcc_mining\")\nMESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}\ndef registrar_erro(mensagem):\n    agora = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    with open(ARQUIVO_LOG, 'a', encoding='utf-8') as f:\n        f.write(f\"[{agora}] {mensagem}\\n\")",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "MESES_MAP",
+        "kind": 5,
+        "importPath": "enrich_data",
+        "description": "enrich_data",
+        "peekOfCode": "MESES_MAP = {\n    'jan': '01', 'feb': '02', 'mar': '03', 'apr': '04', 'may': '05', 'jun': '06',\n    'jul': '07', 'aug': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dec': '12',\n    'september': '09'\n}\ndef registrar_erro(mensagem):\n    agora = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n    with open(ARQUIVO_LOG, 'a', encoding='utf-8') as f:\n        f.write(f\"[{agora}] {mensagem}\\n\")\ndef formatar_data_api(ano, mes, dia):",
+        "detail": "enrich_data",
+        "documentation": {}
+    },
+    {
+        "label": "calcular_dados_lunares",
+        "kind": 2,
+        "importPath": "moon",
+        "description": "moon",
+        "peekOfCode": "def calcular_dados_lunares(ano, mes, dia):\n    try:\n        # 1. Tratamento do Dia\n        d_str = str(dia).strip().lower()\n        if 'unknown' in d_str or not d_str.isdigit():\n            d_int = 15 # Dia médio se desconhecido\n        else:\n            d_int = int(float(d_str))\n        # 2. Tratamento do Mês\n        m_str = str(mes).strip().lower()",
+        "detail": "moon",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "moon",
+        "description": "moon",
+        "peekOfCode": "df = pd.read_csv('GSAF_clima.csv')\n# Mapa para traduzir o texto do mês para número inteiro\nMESES_MAP = {\n    'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,\n    'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,\n    'september': 9\n}\ndef calcular_dados_lunares(ano, mes, dia):\n    try:\n        # 1. Tratamento do Dia",
+        "detail": "moon",
+        "documentation": {}
+    },
+    {
+        "label": "MESES_MAP",
+        "kind": 5,
+        "importPath": "moon",
+        "description": "moon",
+        "peekOfCode": "MESES_MAP = {\n    'jan': 1, 'feb': 2, 'mar': 3, 'apr': 4, 'may': 5, 'jun': 6,\n    'jul': 7, 'aug': 8, 'sep': 9, 'oct': 10, 'nov': 11, 'dec': 12,\n    'september': 9\n}\ndef calcular_dados_lunares(ano, mes, dia):\n    try:\n        # 1. Tratamento do Dia\n        d_str = str(dia).strip().lower()\n        if 'unknown' in d_str or not d_str.isdigit():",
+        "detail": "moon",
+        "documentation": {}
+    }
+]
