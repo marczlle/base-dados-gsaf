@@ -6,6 +6,16 @@ Este documento registra a evolução da proposta de pesquisa e define o plano t�
 
 O resultado não deverá ser apresentado como um sistema oficial de alerta ou como uma estimativa da probabilidade individual de uma pessoa ser atacada. O objetivo é avaliar se padrões globais de sazonalidade, clima e fase lunar conseguem generalizar para regiões costeiras específicas, especialmente Pernambuco.
 
+## 1.1 Resumo da ideia central do trabalho
+
+Este trabalho propõe investigar se variáveis climáticas, sazonais e lunares podem contribuir para estimar o risco diário de ocorrência de incidentes com tubarões em diferentes regiões costeiras.
+
+A pesquisa utilizará uma base previamente limpa da Global Shark Attack File, contendo registros históricos de incidentes, datas e localidades. Como as coordenadas disponíveis são estimativas obtidas a partir de informações textuais, os ataques não serão tratados como pontos exatos. Em vez disso, a costa será dividida automaticamente em segmentos geográficos, reduzindo o impacto da imprecisão espacial.
+
+Pernambuco será utilizado como estudo de caso. O modelo global será avaliado separadamente na região, verificando se padrões aprendidos em outras áreas costeiras conseguem generalizar para um contexto local com características ambientais próprias. Essa etapa permitirá discutir as limitações da transferência de modelos entre regiões.
+
+O trabalho não pretende desenvolver um sistema oficial de alerta nem calcular a probabilidade individual de uma pessoa ser atacada. A proposta é avaliar a capacidade preditiva de dados históricos e ambientais em escala regional. Os resultados também deverão considerar limitações como a ausência de dados sobre quantidade de pessoas na água, a possível subnotificação dos incidentes e a incerteza das coordenadas geográficas.
+
 ## 2. Estado atual dos dados e dos scripts
 
 A base utilizada atualmente é `GSAF_clima_lua.csv`, localizada na raiz do projeto. A auditoria preliminar identificou:
