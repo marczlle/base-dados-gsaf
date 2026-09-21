@@ -4,8 +4,6 @@
 
 Este documento registra a evolução da proposta de pesquisa e define o plano técnico para construir uma base diária, regionalizada espacialmente, e treinar modelos de machine learning capazes de estimar a probabilidade relativa de ocorrência de pelo menos um incidente com tubarão.
 
-O resultado não deverá ser apresentado como um sistema oficial de alerta ou como uma estimativa da probabilidade individual de uma pessoa ser atacada. O objetivo é avaliar se padrões globais de sazonalidade, clima e fase lunar conseguem generalizar para regiões costeiras específicas, especialmente Pernambuco.
-
 ## 1.1 Resumo da ideia central do trabalho
 
 Este trabalho propõe investigar se variáveis climáticas, sazonais e lunares podem contribuir para estimar o risco diário de ocorrência de incidentes com tubarões em diferentes regiões costeiras.
