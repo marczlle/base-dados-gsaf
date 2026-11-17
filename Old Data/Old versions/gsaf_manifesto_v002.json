@@ -1,0 +1,86 @@
+{
+  "version": "v002",
+  "rules_version": "1.1.0",
+  "as_of": "2026-10-23",
+  "date_policy": {
+    "eligible_statuses": [
+      "exact",
+      "reported_date"
+    ],
+    "reported_assumption": "Data de registro aceita como aproximação do dia do ataque por decisão do pesquisador; intervalo não medido."
+  },
+  "script_sha256": "d8be76a08ab8b5c4a33aced69d84a320c77d622b10fb8a775a4919d59fb6ebd0",
+  "sources": [
+    {
+      "path": "Old Data/GSAF_clima_lua.csv",
+      "rows": 5253,
+      "sha256": "ee2adcba9803fc3e2f7277ac49abdf0a059db097136d6d9fe1fce93ccc612b75"
+    },
+    {
+      "path": "Old Data/Md/GSAF5_ml_ready_final.csv",
+      "rows": 7097,
+      "sha256": "5ddabae8839cf7ef1537a301b9c10f2249d0b900cc6a744f85df9deb222c5a1c"
+    }
+  ],
+  "counts": {
+    "input": 5253,
+    "removed_duplicates": 3,
+    "clean": 5250,
+    "exact_date_events": 4741,
+    "reported_date_events": 223,
+    "eligible_daily_events": 4964,
+    "ineligible_date_events": 286,
+    "local_day_events": 4723,
+    "positive_local_days": 4611
+  },
+  "date_status_counts": {
+    "exact": 4741,
+    "ambiguous_numeric": 31,
+    "year_conflict": 19,
+    "reported_date": 223,
+    "day_unknown": 232,
+    "range_or_approximate": 4
+  },
+  "validation": "passed",
+  "outputs": [
+    {
+      "path": "gsaf_limpa_v002.csv",
+      "rows": 5250,
+      "sha256": "cf466e77b2c6be1e66ad0eb5a6eacd4e6bfa662864a1a298e4178f2c0bd37219"
+    },
+    {
+      "path": "gsaf_eventos_diarios_v002.csv",
+      "rows": 4964,
+      "sha256": "7a7f5daa65fbd50b67ed782a8da158351fa7d4a2adb974ff405896e1fb38fa11"
+    },
+    {
+      "path": "gsaf_datas_inelegiveis_v002.csv",
+      "rows": 286,
+      "sha256": "4ae4433b825d2729f75b026534297c194a9bc24b9cbf0fc1791ece381ed9c203"
+    },
+    {
+      "path": "gsaf_dias_positivos_local_v002.csv",
+      "rows": 4611,
+      "sha256": "0c6f1bcde11bf42555dbb40d002aa6feae9df89189200d78e10a4c33fe172315"
+    },
+    {
+      "path": "gsaf_auditoria_v002.csv",
+      "rows": 5253,
+      "sha256": "d565c22e00d4632e55a82b513b6112a6455f5e05fad27658ec8fb78c0a0ea592"
+    },
+    {
+      "path": "gsaf_duplicidades_v002.csv",
+      "rows": 45,
+      "sha256": "a64d23dea64b28a756572b92ac03263a4d889aae8f41e368468d4b21a4749eef"
+    },
+    {
+      "path": "gsaf_normalizacoes_v002.csv",
+      "rows": 4624,
+      "sha256": "3283f01032ed2d734713ef9e7d1d063770c141f95c435782d010dd8141fc4857"
+    },
+    {
+      "path": "gsaf_qualidade_v002.md",
+      "sha256": "8286b33377ee7ba99e1d0ae2d11e4a7c76683eb6df4d9a175d8d0fe285ad56de"
+    }
+  ]
+}

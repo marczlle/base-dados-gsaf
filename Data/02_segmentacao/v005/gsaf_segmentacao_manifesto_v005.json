@@ -1,0 +1,296 @@
+{
+  "version": "v005",
+  "as_of": "2026-11-05",
+  "sources": [
+    {
+      "file": "gsaf_eventos_modelagem_v003.csv",
+      "sha256": "86e4ebbcc63e63e42bb41ddfd6ab7b7c5779cb60c889f9787ea7080b94fc4686"
+    },
+    {
+      "file": "natural_earth_coastline_10m_v004.zip",
+      "sha256": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_coastline.zip",
+      "source_version": "4.1.0"
+    },
+    {
+      "file": "natural_earth_minor_islands_coastline_10m_v004.zip",
+      "sha256": "fa1d68b486b3a3ea2f625517d54b36d7544880b388170891b53a065e826ebd3e",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_minor_islands_coastline.zip",
+      "source_version": "4.1.0"
+    },
+    {
+      "file": "natural_earth_admin0_map_units_10m_v004.zip",
+      "sha256": "45bebe2aaf8bf42b9daf4428594925bcb11eabd32fe9dc6e0acf681438053eb5",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_0_map_units.zip",
+      "source_version": "5.1.1"
+    },
+    {
+      "file": "natural_earth_admin1_states_provinces_10m_v005.zip",
+      "sha256": "efc59726337323058f9446210adc96673179cd344e053666ee3d28cb58ba2b05",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_1_states_provinces.zip",
+      "source_version": "5.1.1"
+    },
+    {
+      "file": "gsaf_toponimos_revisados_v005.csv",
+      "sha256": "a1caafa735e565d8d48abffc4d88ab1e8240183d430e3fee4847a041cf55a6f9"
+    },
+    {
+      "file": "gsaf_eventos_segmentos_v004.csv",
+      "sha256": "ac49cbe433c4e8974eced1f47463addc14f83d1c203fbcd0c827a7a11cb0b42c",
+      "role": "baseline_comparison"
+    }
+  ],
+  "script_sha256": "b2b93dd166f70560b07c4e68ab91731bfa58b96207197d1c5cbe73442abc9d5e",
+  "rules": {
+    "max_distance_km": 25,
+    "country_tolerance_km": 10,
+    "geodesy": "great-circle arcs on sphere with mean radius 6371.0088 km",
+    "segment_sizes_km": [
+      10,
+      25,
+      50
+    ],
+    "adaptive_max_segments": 4,
+    "adaptive_min_distinct_days": 10,
+    "adaptive_only_scale_km": 25,
+    "country_unverified": "review_only",
+    "country_aliases": {
+      "ANDAMAN / NICOBAR ISLANDAS": [
+        "INDIA"
+      ],
+      "ANTIGUA": [
+        "ANTIGUA AND BARBUDA"
+      ],
+      "AZORES": [
+        "PORTUGAL"
+      ],
+      "BRITISH ISLES": [
+        "UNITED KINGDOM",
+        "IRELAND",
+        "ISLE OF MAN"
+      ],
+      "CAPE VERDE": [
+        "CABO VERDE"
+      ],
+      "DIEGO GARCIA": [
+        "BRITISH INDIAN OCEAN TERRITORY"
+      ],
+      "EGYPT / ISRAEL": [
+        "EGYPT",
+        "ISRAEL"
+      ],
+      "IRAN / IRAQ": [
+        "IRAN",
+        "IRAQ"
+      ],
+      "JOHNSTON ISLAND": [
+        "JOHNSTON ATOLL"
+      ],
+      "MICRONESIA": [
+        "FEDERATED STATES OF MICRONESIA",
+        "MICRONESIA"
+      ],
+      "NETHERLANDS ANTILLES": [
+        "CURACAO",
+        "BONAIRE",
+        "SINT MAARTEN",
+        "SABA",
+        "SINT EUSTATIUS"
+      ],
+      "NEW GUINEA": [
+        "PAPUA NEW GUINEA",
+        "INDONESIA"
+      ],
+      "PALESTINIAN TERRITORIES": [
+        "PALESTINE",
+        "GAZA"
+      ],
+      "SAINT KITTS AND NEVIS": [
+        "SAINT KITTS AND NEVIS",
+        "ST KITTS AND NEVIS"
+      ],
+      "SAINT MARTIN": [
+        "SAINT MARTIN",
+        "ST MARTIN"
+      ],
+      "SOLOMON ISLANDS / VANUATU": [
+        "SOLOMON ISLANDS",
+        "VANUATU"
+      ],
+      "ST HELENA, BRITISH OVERSEAS TERRITORY": [
+        "SAINT HELENA",
+        "ST HELENA",
+        "ASCENSION"
+      ],
+      "TURKEY": [
+        "TURKEY",
+        "TURKIYE"
+      ],
+      "US VIRGIN ISLANDS": [
+        "US VIRGIN ISLANDS",
+        "UNITED STATES VIRGIN ISLANDS",
+        "VIRGIN ISLANDS U S"
+      ],
+      "USA": [
+        "USA",
+        "UNITED STATES OF AMERICA",
+        "UNITED STATES"
+      ]
+    },
+    "limit_sensitivity_without_country_check": {
+      "10": 4310,
+      "25": 4551,
+      "50": 4673
+    },
+    "extended_distance_km": 75,
+    "extension": "Named coastal locality, compatible country and mapped state if available; block explicit noncoastal or remote context, shared geocodes and unverified island proxies.",
+    "reviewed_toponyms": "gsaf_toponimos_revisados_v005.csv",
+    "territory_aliases": [
+      {
+        "country": "USA",
+        "state": "PUERTO RICO",
+        "map_label": "PUERTO RICO",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "GUAM",
+        "map_label": "GUAM",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "US VIRGIN ISLANDS",
+        "map_label": "UNITED STATES VIRGIN ISLANDS",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "VIRGIN ISLANDS",
+        "map_label": "UNITED STATES VIRGIN ISLANDS",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "PALMYRA ATOLL",
+        "map_label": "PALMYRA ATOLL",
+        "url": "https://www.fws.gov/national-monument/pacific-islands-heritage-marine"
+      },
+      {
+        "country": "USA",
+        "state": "JOHNSTON ATOLL",
+        "map_label": "JOHNSTON ATOLL",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "MIDWAY ATOLL",
+        "map_label": "MIDWAY ATOLL",
+        "url": "https://www.doi.gov/oia/islands/politicatypes"
+      },
+      {
+        "country": "USA",
+        "state": "WAKE ISLAND",
+        "map_label": "WAKE ATOLL",
+        "url": "https://www.fws.gov/national-monument/pacific-islands-heritage-marine"
+      },
+      {
+        "country": "AUSTRALIA",
+        "state": "TERRITORY OF COCOS KEELING ISLANDS",
+        "map_label": "CCK",
+        "url": "https://www.ga.gov.au/scientific-topics/national-location-information/geography/external-territories"
+      }
+    ],
+    "spatial_is_approximate": "All assigned locations derive from approximate geocodes; distance_km is geocode to selected shoreline."
+  },
+  "events": 4964,
+  "status_counts": {
+    "assigned": 4488,
+    "outside_distance": 274,
+    "country_mismatch": 63,
+    "no_coordinates": 102,
+    "country_unverified": 37
+  },
+  "scales": {
+    "10": {
+      "segments": 98003,
+      "active_segments": 1668
+    },
+    "25": {
+      "segments": 41735,
+      "active_segments": 1309
+    },
+    "50": {
+      "segments": 23376,
+      "active_segments": 1062
+    }
+  },
+  "assignment_method_counts": {
+    "direct_geocode": 4434,
+    "extended_geocode": 23,
+    "reviewed_toponym": 31
+  },
+  "gained_assignments": 54,
+  "lost_assignments": 0,
+  "chains": 6836,
+  "adaptive_regions": 903,
+  "eligible_regions": 144,
+  "events_in_eligible_regions": 2604,
+  "products": [
+    {
+      "file": "atlas_indice_v005.json",
+      "sha256": "0a9587b434ab22534a76d332a2eb6d7eae6171cd02e18c2cd6a295258af2917b",
+      "bytes": 956698
+    },
+    {
+      "file": "gsaf_eventos_segmentos_v005.csv",
+      "sha256": "e29cc62c50127b29c470f11bf04d164c9cce2cb86cdb66f385c126492f7ccd84",
+      "bytes": 2415215
+    },
+    {
+      "file": "gsaf_regioes_adaptativas_v005.csv",
+      "sha256": "e8073ca72844eb0928ed5e83b3680be09597d4a48c9d1e2d93afb9cc9c6282e0",
+      "bytes": 47350
+    },
+    {
+      "file": "gsaf_segmentacao_relatorio_v005.md",
+      "sha256": "7b6d74855d330514e2f27af5078b84b182493cade5b9f2036821a03e949244f1",
+      "bytes": 3380
+    },
+    {
+      "file": "gsaf_segmentacao_transicoes_v005.csv",
+      "sha256": "cd7b83155172881d7a5ce713980f154b21b8a11a0bd4562d8d6b9e802a0ade70",
+      "bytes": 693019
+    },
+    {
+      "file": "atlas_segmentos_10km_v005.json",
+      "sha256": "ce6bccc48da027d95ce572ff33428d0b88e6d0c3e362b2caf907694c5a49eddf",
+      "bytes": 30875886
+    },
+    {
+      "file": "gsaf_segmentos_10km_v005.geojson.gz",
+      "sha256": "f66163e6ca3531d83333ede3fc8a6ec21702e34f380bb7c96d93e55fe1b4b826",
+      "bytes": 5900029
+    },
+    {
+      "file": "atlas_segmentos_25km_v005.json",
+      "sha256": "d942bcabc6fcbb0722ff7d4a0915274e43602babfa27552dcc2d8df86f2d75cb",
+      "bytes": 20054384
+    },
+    {
+      "file": "gsaf_segmentos_25km_v005.geojson.gz",
+      "sha256": "af31e3dac0c4de60dd3789ee4d27985dc1444dbe0cdf95ed83da1ff3a7dd5bac",
+      "bytes": 4708025
+    },
+    {
+      "file": "atlas_segmentos_50km_v005.json",
+      "sha256": "62bc8bc8e092277fc263dc36ec87b589df28bbcc804e9e3f4a1a97cb323b7645",
+      "bytes": 16350229
+    },
+    {
+      "file": "gsaf_segmentos_50km_v005.geojson.gz",
+      "sha256": "9d0d822f4b5db561e9109d1fae1ca9be396a37e6c44a40800776323da5125c26",
+      "bytes": 4268297
+    }
+  ]
+}

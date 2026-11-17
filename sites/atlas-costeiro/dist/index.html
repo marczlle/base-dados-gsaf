@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081522">
+  <meta name="description" content="Explore segmentos costeiros e registros históricos de ataques de tubarão em um atlas interativo de pesquisa.">
+  <meta name="atlas-data" content="./data/atlas_indice_v005.json">
+  <title>Atlas Costeiro — Exploração espacial de ataques</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a2531'/%3E%3Cpath d='M6 18q5-10 10-3t10-3M6 24q5-8 10-2t10-3' fill='none' stroke='%235ee9cf' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css?v=v005">
+  <script src="./atlas.js?v=v005" defer></script>
+</head>
+<body>
+  <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-wave" viewBox="0 0 24 24"><path d="M2.5 13c3.5 0 3.5-5 7-5s3.5 5 7 5 3.5-5 5-5M2.5 18c3.5 0 3.5-5 7-5s3.5 5 7 5 3.5-5 5-5"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3.5 12h17M12 3c4.3 4.8 4.3 13.2 0 18-4.3-4.8-4.3-13.2 0-18Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 10-7 10S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 3.8v4.4m8-4.4v4.4M4 10h16m-12 4h3m2 0h3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-focus" viewBox="0 0 24 24"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.8"/><path d="m15 15 4.5 4.5"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10m-7 6h4"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8v.1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 6v12m6-12v12" stroke-width="2.6"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 7-2-2 7-7 2 2-7Z"/><path d="m9 9 5 5"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6m0-6-8 8m8 2v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></symbol>
+  </svg>
+
+  <a class="skip" href="#explorar">Pular para o explorador</a>
+  <header class="topbar">
+    <div class="top-inner">
+      <a href="#inicio" class="brand" aria-label="Atlas Costeiro, início">
+        <span class="brand-icon"><svg class="icon"><use href="#i-wave"/></svg></span>
+        <span><strong>Atlas Costeiro</strong><small>GSAF <span>·</span> Pesquisa espacial</small></span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a class="nav-current" href="#explorar"><svg class="icon"><use href="#i-globe"/></svg>Explorador</a>
+        <a class="nav-link" href="./analise.html">Clima e Lua</a>
+        <button class="nav-link" id="method-open" type="button"><svg class="icon"><use href="#i-info"/></svg>Metodologia</button>
+      </nav>
+      <span class="version"><i></i><span id="version-label">Dados · Etapa 02</span></span>
+    </div>
+  </header>
+
+  <main class="shell" id="inicio">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-radar" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="signal"></span> ETAPA 02 <span class="eyebrow-div"></span> OBSERVATÓRIO ESPACIAL</div>
+        <h1 id="title">O litoral em <em>segmentos.</em></h1>
+        <p>Explore os segmentos costeiros e veja como os registros históricos de ataques de tubarão se distribuem no espaço e no tempo.</p>
+      </div>
+      <div class="hero-callout"><svg class="icon"><use href="#i-compass"/></svg><span>Três escalas de análise <small>10 KM <b>·</b> 25 KM <b>·</b> 50 KM</small></span></div>
+    </section>
+
+    <section class="metrics" aria-label="Visão geral dos dados na escala selecionada">
+      <article class="metric"><div class="metric-icon m-teal"><svg class="icon"><use href="#i-layers"/></svg></div><div><span>Segmentos costeiros</span><strong id="metric-segments">—</strong><small id="metric-scale">Escala de 25 km</small></div></article>
+      <article class="metric"><div class="metric-icon m-coral"><svg class="icon"><use href="#i-pin"/></svg></div><div><span>Ataques associados</span><strong id="metric-assigned">—</strong><small id="metric-assigned-note">Na escala selecionada</small></div></article>
+      <article class="metric"><div class="metric-icon m-blue"><svg class="icon"><use href="#i-calendar"/></svg></div><div><span>Período dos registros</span><strong id="metric-period">—</strong><small>Datas exatas e aproximadas</small></div></article>
+      <article class="metric"><div class="metric-icon m-yellow"><svg class="icon"><use href="#i-clock"/></svg></div><div><span>Sem associação</span><strong id="metric-pending">—</strong><small id="metric-pending-note">Registros preservados na base</small></div></article>
+    </section>
+
+    <section id="explorar" class="workspace" aria-label="Explorador de segmentos e ataques">
+      <div class="map-card">
+        <header class="card-header map-header">
+          <div><div class="overline"><i></i> MAPA INTERATIVO</div><h2>Costa mundial</h2></div>
+          <fieldset class="scales" aria-label="Escala do mapa"><legend class="sr-only">Escala do mapa</legend><button type="button" data-scale="10" aria-pressed="false">10 km</button><button type="button" data-scale="25" aria-pressed="true">25 km</button><button type="button" data-scale="50" aria-pressed="false">50 km</button></fieldset>
+        </header>
+        <div class="map-frame" id="map-frame">
+          <canvas id="map" tabindex="0" role="img" aria-label="Mapa mundial interativo. Arraste para mover. Use mais e menos para o zoom ou as setas para mover. A lista ao lado permite selecionar registros pelo teclado."></canvas>
+          <div class="map-tools" aria-label="Controles de navegação do mapa">
+            <button id="zoom-in" type="button" title="Aproximar" aria-label="Aproximar"><svg class="icon"><use href="#i-plus"/></svg></button>
+            <button id="zoom-out" type="button" title="Afastar" aria-label="Afastar"><svg class="icon"><use href="#i-minus"/></svg></button>
+            <button id="zoom-reset" type="button" title="Voltar à vista mundial" aria-label="Voltar à vista mundial"><svg class="icon"><use href="#i-focus"/></svg></button>
+          </div>
+          <div class="map-layers"><label><input type="checkbox" id="layer-events" checked> Ataques</label><label id="layer-region-label" hidden><input type="checkbox" id="layer-regions"> Regiões de 25 km</label></div>
+          <div class="map-message" id="map-message" role="status"><span class="spinner"></span><span>Carregando o atlas…</span></div>
+          <div class="map-tip" id="map-tip" hidden></div>
+          <div class="map-bottom"><div class="scale-bar" id="scale-bar"><span></span><b>—</b></div><span id="map-credit">Natural Earth</span></div>
+        </div>
+        <div class="map-legend" aria-label="Legenda do mapa">
+          <span><i class="legend-line"></i> Costa segmentada</span><span><i class="legend-line active"></i> Trecho com registro</span><span><i class="legend-dot"></i> Data exata</span><span><i class="legend-dot approx"></i> Data aproximada</span><span><i class="legend-dot spatial"></i> Vínculo por aproximação</span>
+        </div>
+        <div class="timeline" aria-label="Linha do tempo">
+          <button type="button" class="play" id="play" aria-label="Reproduzir linha do tempo" title="Reproduzir linha do tempo" disabled><svg class="icon"><use href="#i-play"/></svg></button>
+          <div class="timeline-main">
+            <div class="timeline-heading"><label for="year-end">Linha do tempo</label><output for="year-start year-end" id="period-label">—</output></div>
+            <input id="year-end" type="range" min="1900" max="2026" value="2026" aria-label="Ano final na linha do tempo" disabled>
+            <div class="timeline-labels" id="timeline-ticks" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-card" aria-labelledby="side-title">
+        <header class="card-header side-header"><div><div class="overline"><i></i> BUSCA E FILTROS</div><h2 id="side-title">Explorar dados</h2></div><div class="side-icon"><svg class="icon"><use href="#i-search"/></svg></div></header>
+        <div class="side-content">
+          <label class="searchbox" for="search"><svg class="icon"><use href="#i-search"/></svg><input id="search" type="search" placeholder="Local, país ou ID…" autocomplete="off" spellcheck="false" disabled><span class="shortcut" aria-hidden="true">/</span></label>
+          <div class="filter-grid">
+            <label>Precisão da data<select id="quality" disabled><option value="all">Todas as datas</option><option value="exact">Somente exatas</option><option value="approximate">Somente aproximadas</option></select></label>
+            <label>Ano inicial<select id="year-start" disabled><option>—</option></select></label>
+          </div>
+          <div class="filter-secondary"><label for="country">País</label><select id="country" disabled><option value="">Todos os países</option></select></div>
+          <div class="filter-secondary" id="spatial-filter"><label for="spatial-method">Vínculo espacial</label><select id="spatial-method" disabled><option value="all">Todos os vínculos</option><option value="near">Por proximidade</option><option value="approximate">Por aproximação</option></select></div>
+          <div class="result-tabs" aria-label="Tipo de resultado"><button type="button" data-tab="segments" aria-pressed="true">Segmentos</button><button type="button" data-tab="events" aria-pressed="false">Ataques</button><button type="button" data-tab="pending" aria-pressed="false">Pendências</button></div>
+          <div class="results-meta"><p id="result-count" aria-live="polite">Carregando dados…</p><label id="empty-label" hidden><input type="checkbox" id="empty-segments"> Sem ataques</label><button id="clear-filters" type="button" hidden>Limpar filtros</button></div>
+          <div class="details" id="details" hidden></div>
+          <div class="results" id="results" tabindex="0" aria-label="Resultados da busca"><div class="empty"><span class="spinner"></span><p>Aguarde a leitura dos dados.</p></div></div>
+          <div class="side-foot" id="side-foot"><svg class="icon"><use href="#i-info"/></svg> Selecione no mapa ou na lista para ver os detalhes.</div>
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer"><span><svg class="icon"><use href="#i-wave"/></svg> Atlas Costeiro <span class="muted">·</span> Etapa 02 do projeto</span><span>Registros históricos · Geometria <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener noreferrer">Natural Earth <svg class="icon"><use href="#i-external"/></svg></a></span></footer>
+  </main>
+
+  <dialog id="method" aria-labelledby="method-title"><div class="dialog-body"><div class="overline"><i></i> SOBRE OS DADOS</div><button id="method-close" class="close-button" aria-label="Fechar metodologia" type="button"><svg class="icon"><use href="#i-x"/></svg></button><h2 id="method-title">Como ler o atlas</h2><p>O mapa associa registros históricos a trechos definidos ao longo da linha de costa. Cada ilha é segmentada de forma independente.</p><dl><div><dt>Escalas costeiras</dt><dd>10, 25 e 50 km. A escala principal é 25 km.</dd></div><div><dt>Vínculo espacial</dt><dd id="method-validation">A associação usa distância, compatibilidade geográfica e, quando disponível, uma referência documentada da localidade. Os casos sem vínculo ficam em Pendências.</dd></div><div><dt>O que os pontos mostram</dt><dd>As coordenadas originais foram estimadas pelos nomes de lugares. Os pontos de referência, os trechos associados e as distâncias não indicam a posição exata do ataque. O anel lilás indica um vínculo por aproximação, independentemente da precisão da data.</dd></div><div><dt>Datas aproximadas</dt><dd>As datas <em>Reported</em> foram aceitas como aproximações; o mapa as diferencia das datas exatas.</dd></div><div><dt>Regiões adaptativas</dt><dd>Na escala de 25 km, vizinhos podem ser unidos até quatro segmentos, buscando pelo menos dez dias distintos com registros.</dd></div><div><dt>Leitura dos resultados</dt><dd>A contagem representa registros associados. O mapa não estima risco e não distingue ausência de ataques de ausência de registros.</dd></div></dl><button class="primary" id="method-confirm" type="button">Voltar ao mapa <svg class="icon"><use href="#i-arrow"/></svg></button></div></dialog>
+</body>
+</html>

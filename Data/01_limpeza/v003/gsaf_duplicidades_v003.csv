@@ -1,0 +1,46 @@
+﻿duplicate_group_id,assessment,input_count,removed_count,source_records_distinct,source_csv_records,legacy_csv_records,legacy_case_numbers,legacy_names
+dup_5cf20e2a55ea,distinct_source_records,2,0,2,32;33,33;34,,Livia Mulheim;Lukas Schindler
+dup_e6431d5bcbb4,distinct_source_records,2,0,2,84;85,85;86,,Rileigh Decker;Summer Layman
+dup_f435e8206886,distinct_source_records,2,0,2,95;96,96;97,,Gianluca Di Gioia;Peppino Fappani
+dup_f2b380eec7d4,distinct_source_records,2,0,2,405;406,415;416,2021.06.14.a;2021.06.14.b,Jai Villamilis;male
+dup_45f572a82d12,distinct_source_records,2,0,2,1029;1030,1045;1046,2016.04.18.a;2016.04.18.b,Hoata Iotua;Teva Tokoragi
+dup_70d5633a2595,distinct_source_records,2,0,3,1517;1519,1540;1541;1542,2012.06.14.b;2012.06.14.c;2012.06.14.d,female;male
+dup_ca3faaa9206c,distinct_source_records,2,0,2,1853;1854,1879;1880,2009.06.02.a;2009.06.02.b,"Luc, a Belgian diver;Nil, a dive guide"
+dup_3f9b0aee6e24,distinct_source_records,2,0,2,1940;1941,1966;1967,2008.09.06.a;2008.09.06.b,male
+dup_15f31a80b9b0,distinct_source_records,2,0,2,2402;2403,2437;2438,2004.04.13.a;2004.04.13.b,male 1;male 2
+dup_1689a6a7869d,distinct_source_records,2,0,2,2438;2439,2474;2475,2003.11.30.a;2003.11.30.b,Josh Halverson;Shane Scott
+dup_e1dc92c80391,distinct_source_records,2,0,2,2629;2630,2666;2667,2001.09.03.a;2001.09.03.b,Natalia (Natasha) Slobonskaya;Sergi Zaloukaev
+dup_30d97921c9be,distinct_source_records,2,0,2,2808;2809,2850;2851,1999.11.00.a;1999.11.00.b,Dally Bayo;Morson Daniel
+dup_255acf60e1da,distinct_source_records,2,0,2,2965;2966,3012;3013,1997.05.31.a;1997.05.31.b,Johnny Bowden;Robert Fuller
+dup_d5ef620132f5,distinct_source_records,2,0,2,2985;2986,3032;3033,1996.10.28.a;1996.10.28.b,Gilvan Jaime de Freitas Júnior;Luis Henrique Messias
+dup_b8853032b53a,distinct_source_records,2,0,2,3020;3021,3067;3068,1996.04.25.a;1996.04.25.b,Aya Hamaea;Luke Baker
+dup_bcbcc0091e37,distinct_source_records,2,0,2,3027;3028,3074;3075,1996.02.10.b;1996.02.10.c,College student;a father of six
+dup_bff0a15a0ff5,distinct_source_records,2,0,2,3269;3270,3334;3335,1991.11.26.a;1991.11.26.b,Louise Sourisseau;Martha Joy Morrell
+dup_e7819d6cedf2,distinct_source_records,2,0,2,3788;3789,3889;3890,1978.04.02.a;1978.04.02.b,Mike deGruy;Philip Light
+dup_78f36218d761,distinct_source_records,3,0,3,3814;3815;3816,3918;3919;3920,1977.03.13.a;1977.03.13.b;1977.03.13.c,John Hayes;Verdon Harrison;Victor Beaver
+dup_3445f46491d1,distinct_source_records,2,0,2,3834;3835,3938;3939,1976.09.12.a;1976.09.12.b,"Michael Karras, Jr.;Ricky Karras, Jr."
+dup_e69772dbb7de,distinct_source_records,2,0,2,3911;3912,4019;4020,1974.09.02.a;1974.09.02.b,Dale Webster;Jack Greenlaw
+dup_a53ecc781c4f,distinct_source_records,3,0,3,3916;3917;3918,4024;4025;4026,1974.08.16.a;1974.08.16.b;1974.08.16.c,Ho-Sin-Ming (male);Yee Wing Ping (male);male
+dup_7d862af155c6,distinct_source_records,2,0,2,3933;3934,4041;4042,1974.02.13.a;1974.02.13.b,Damon Kendrick;Joe Kool
+dup_1c3067615c70,distinct_source_records,2,0,2,3939;3940,4048;4049,1974.01.07.a;1974.01.07.b,Oaulkurt-Pape;male
+dup_c76c6a3f6879,distinct_source_records,2,0,2,3983;3984,4097;4098,1972.06.26.a;1972.06.26.b,Kenneth Murchison;Ronald Kelly
+dup_700bb930807c,distinct_source_records,2,0,2,4018;4019,4134;4135,1971.04.05.a;1971.04.05.b,Alberto Mayora;Tarcisio Mayora
+dup_c4c2959bd330,distinct_source_records,2,0,2,4039;4040,4161;4162,1970.06.13.a;1970.06.13.b,John Alpheus;Lincoln Alpheus
+dup_4dc66ee7e401,distinct_source_records,3,0,3,4049;4050;4051,4171;4172;4173,1970.01.23.a;1970.01.23.b;1970.01.23.c,Betual Tivane;Elissane Mobunda;Mabua Mogadura
+dup_e036e0387ff4,distinct_source_records,2,0,3,4432;4433,4584;4585;4586,1962.06.11.a;1962.06.11.b,Clarence Anglin;Frank Lee Morris;John William Anglin
+dup_e947dc3ce631,distinct_source_records,2,0,2,4475;4476,4632;4633,1961.12.28.b;1961.12.28.c,Margaret Hobbs;Martyn Steffens
+dup_3cd366d0d628,distinct_source_records,2,0,2,4807;4808,5009;5010,1956.08.00.d;1956.08.00.e,Leslie Nye;Richard Kirby
+dup_d9bbb69af707,distinct_source_records,2,0,2,4836;4837,5047;5048,1955.09.23.a;1955.09.23.b,R.C. Olsen;Robert C. Hightower
+dup_f0666ff82f4e,distinct_source_records,2,0,2,4880;4881,5099;5100,1954.08.12.a;1954.08.12.b,Dr. D.H. Teas;Dr. H. Warmke
+dup_4cf9174e1d78,distinct_source_records,2,0,2,4947;4948,5177;5178,1952.07.27.b;1952.07.27.c,Ben Tillman Homes;Truman Jones
+dup_aa0f24e6ffe6,distinct_source_records,2,0,2,4972;4973,5208;5209,1951.08.17.a;1951.08.17.b,George Athanasenas;Vanda Pierri
+dup_cec406fe1169,distinct_source_records,2,0,2,5022;5023,5274;5275,1949.08.28.a;1949.08.28.b,Brian Ware (rescuer);James Howard
+dup_27a6a6d81772,distinct_source_records,2,0,2,5069;5070,5335;5336,1947.11.14.a;1947.11.14.b,John Martini;Peter Curruthers
+dup_0d95e20e543e,distinct_source_records,2,0,2,5071;5072,5337;5338,1947.11.08.a;1947.11.08.b,Edwin Elford;Rupert Elford
+dup_ed4919c1ed17,distinct_source_records,2,0,2,5169;5170,5446;5447,1943.05.17.a;1943.05.17.b,"Arthur George Reading, Naval aviator;E.H. Almond, US Navy radioman"
+dup_633e0b38f479,distinct_source_records,2,0,2,5211;5212,5505;5506,1941.11.27.a;1941.11.27.b,Bill Nash;Gordon Annison
+dup_3251d0de502f,distinct_source_records,2,0,2,5234;5235,5535;5536,1940.07.13.a;1940.07.13.b,Harvey H. Haley (rescuer);William Tanner
+dup_1597012d5613,confirmed_source_duplicate,2,1,1,5247;5248,7085;7086,2017.07.29.a,female
+dup_6af9f465eac5,confirmed_source_duplicate,2,1,1,5249;5250,7087;7088,2004.08.00,boat
+dup_dce9c47bcc22,distinct_source_records,2,0,2,5251;5252,7089;7090,1982.10.23,John Lippoth;Mark Adams
+dup_c73b1d081a9e,confirmed_source_duplicate,2,1,1,5253;5254,7091;7092,1959.07.00.a,Lobster fishermen

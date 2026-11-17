@@ -1,0 +1,46 @@
+{
+  "version": "v010",
+  "events": 4964,
+  "coverage": {
+    "moon_illumination": 4964,
+    "temperature_2m_mean": 4487,
+    "precipitation_sum": 4487,
+    "wind_speed_10m_mean": 4487,
+    "wind_speed_10m_max": 4487,
+    "precipitation_previous_3d": 4487,
+    "precipitation_previous_7d": 4486
+  },
+  "sources": [
+    {
+      "path": "Data/atlas/v005/atlas_indice_v005.json",
+      "sha256": "0a9587b434ab22534a76d332a2eb6d7eae6171cd02e18c2cd6a295258af2917b"
+    },
+    {
+      "path": "Data/02_segmentacao/v005/gsaf_eventos_segmentos_v005.csv",
+      "sha256": "e29cc62c50127b29c470f11bf04d164c9cce2cb86cdb66f385c126492f7ccd84"
+    },
+    {
+      "path": "Data/04_clima/v008/gsaf_clima_diario_25km_v008.parquet",
+      "sha256": "f84f3578e0732723e7e1390cb7d53014c2bcbb03574574e01e9d968dde16490c"
+    },
+    {
+      "path": "Data/05_lua/v009/gsaf_calendario_lunar_v009.csv",
+      "sha256": "a013c33d2af9e05466f58ac0d5d4a0841d286b507eb6f794c55d954266863b8e"
+    }
+  ],
+  "script": {
+    "path": "Scripts/preparar_analise_atlas.py",
+    "sha256": "b909587239107ab9707801ab76d2fea6bb6c702a678fd5b1fe8922ceafde3859"
+  },
+  "product": {
+    "file": "atlas_analise_v010.json",
+    "bytes": 333198,
+    "sha256": "f287524b0ad805ff900e89ed53561b0b8c0e39880196bddb3849e50ba65574dd"
+  },
+  "rules": [
+    "Uma linha por evento elegível no atlas. Média sobre ocorrências, mantendo múltiplas por dia.",
+    "Clima ERA5 pelo trecho 25 km atribuído e a data local. Campos ausentes ficam nulos.",
+    "Lua pela data na v009, iluminação reexpressa em percentual.",
+    "Dados públicos incluem data, país/área e variáveis ambientais."
+  ]
+}

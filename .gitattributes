@@ -1,0 +1,9 @@
+# Preserve the bytes covered by the data manifests.
+Data/** -text
+"Old Data/**" -text
+Scripts/build_*.py -text
+Scripts/preparar_*.py -text
+Scripts/clean_data.py -text
+Scripts/segment_coast.py -text
+sites/atlas-costeiro/dist/data/** -text
+Data/04_clima/**/*.parquet filter=lfs diff=lfs merge=lfs -text

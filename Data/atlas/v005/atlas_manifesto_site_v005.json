@@ -1,0 +1,62 @@
+{
+  "versao": "v005",
+  "regra": "O site usa apenas as projeções cartográficas da etapa 2 e o mapa-base; os CSVs de origem não são incluídos.",
+  "mapa_base": {
+    "fonte": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/ne_110m_land.geojson",
+    "camada": "Natural Earth Land 1:110m",
+    "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+  },
+  "dados": [
+    {
+      "arquivo": "Data/atlas_indice_v005.json",
+      "bytes": 956698,
+      "sha256": "0a9587b434ab22534a76d332a2eb6d7eae6171cd02e18c2cd6a295258af2917b"
+    },
+    {
+      "arquivo": "Data/atlas_terra_v005.geojson",
+      "bytes": 138160,
+      "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9"
+    },
+    {
+      "arquivo": "Data/atlas_segmentos_10km_v005.json.gz",
+      "bytes": 5605668,
+      "sha256": "43991814fb97258bdecb1057eec18bb8ade6e61aad405126d114215266328335",
+      "derivado_de": {
+        "arquivo": "Data/atlas_segmentos_10km_v005.json",
+        "sha256": "ce6bccc48da027d95ce572ff33428d0b88e6d0c3e362b2caf907694c5a49eddf"
+      }
+    },
+    {
+      "arquivo": "Data/atlas_segmentos_25km_v005.json.gz",
+      "bytes": 4633246,
+      "sha256": "266a0b68c8040d8de7412fa4459b40a208c160df4870f4de616756a66574f0c3",
+      "derivado_de": {
+        "arquivo": "Data/atlas_segmentos_25km_v005.json",
+        "sha256": "d942bcabc6fcbb0722ff7d4a0915274e43602babfa27552dcc2d8df86f2d75cb"
+      }
+    },
+    {
+      "arquivo": "Data/atlas_segmentos_50km_v005.json.gz",
+      "bytes": 4266030,
+      "sha256": "ad289e597502d8608bffd3027727fd3956b76d06802c7881016415dc6ef9e2aa",
+      "derivado_de": {
+        "arquivo": "Data/atlas_segmentos_50km_v005.json",
+        "sha256": "62bc8bc8e092277fc263dc36ec87b589df28bbcc804e9e3f4a1a97cb323b7645"
+      }
+    }
+  ],
+  "interface": [
+    {
+      "arquivo": "sites/atlas-costeiro/dist/atlas.js",
+      "sha256": "7c8f081b9ca05d664d437b3e17425bbbe0d8937080fda146422ec99d96d577e7"
+    },
+    {
+      "arquivo": "sites/atlas-costeiro/dist/index.html",
+      "sha256": "8940c5da66b7a673663165d4247a1febbc9575c177d14a29a2d80f1ae2031e71"
+    },
+    {
+      "arquivo": "sites/atlas-costeiro/dist/styles.css",
+      "sha256": "80b7cdbf70505c44aed60e66f1e037d57711e2450ec7f2fc607a8372f587cea3"
+    }
+  ]
+}

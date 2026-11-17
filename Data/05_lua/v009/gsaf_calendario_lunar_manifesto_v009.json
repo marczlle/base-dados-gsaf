@@ -1,0 +1,53 @@
+{
+  "version": "v009",
+  "panel_version": "v006",
+  "pyephem_version": "4.2.1",
+  "pyarrow_version": "26.0.1",
+  "dates": 31545,
+  "date_range": [
+    "1940-01-01",
+    "2026-05-24"
+  ],
+  "phase_counts": {
+    "last_quarter": 4016,
+    "waning_crescent": 3950,
+    "new_moon": 3862,
+    "waxing_crescent": 3951,
+    "first_quarter": 4030,
+    "waxing_gibbous": 3931,
+    "full_moon": 3854,
+    "waning_gibbous": 3951
+  },
+  "reference_time_utc": "12:00:00Z",
+  "rules": [
+    "Uma linha para cada data presente no painel de origem. A referência comum a todos os trechos é 12:00 UTC.",
+    "A fase é a diferença entre as longitudes eclípticas geocêntricas aparentes da Lua e do Sol, em [0°, 360°). Lua nova corresponde a 0°, quarto crescente a 90°, cheia a 180° e quarto minguante a 270°.",
+    "O rótulo da fase indica o setor de 45° mais próximo. O seno e o cosseno representam o ângulo contínuo.",
+    "A iluminação é a fração do disco lunar iluminada, entre 0 e 1, segundo o PyEphem.",
+    "O dia do ano é codificado em seno e cosseno usando (dia do ano − 1) dividido por 365 ou 366. O ano bruto permite ajustar transformações futuras só com os dados de treino."
+  ],
+  "references": [
+    "https://rhodesmill.org/pyephem/coordinates.html",
+    "https://rhodesmill.org/pyephem/quick.html"
+  ],
+  "inputs": [
+    {
+      "path": "Data/03_painel_diario/v006/gsaf_painel_diario_25km_v006.parquet",
+      "sha256": "355b04944198e7d008b63ada01190562a42379e8ae693d91e63948604b4155b0"
+    },
+    {
+      "path": "Scripts/build_lunar_calendar.py",
+      "sha256": "d8df39f66e480e55cf12b254c3905598f673c21cf2b47bf9777b77b3d71fd361"
+    }
+  ],
+  "products": [
+    {
+      "file": "gsaf_calendario_lunar_v009.csv",
+      "sha256": "a013c33d2af9e05466f58ac0d5d4a0841d286b507eb6f794c55d954266863b8e"
+    },
+    {
+      "file": "gsaf_calendario_lunar_relatorio_v009.md",
+      "sha256": "b7e8d750e53fc5c5825cdec6bd432961613616fc121ad45b717e997fd5a2743d"
+    }
+  ]
+}

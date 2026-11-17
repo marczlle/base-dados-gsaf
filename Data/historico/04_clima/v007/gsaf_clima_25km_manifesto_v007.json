@@ -1,0 +1,72 @@
+{
+  "version": "v007",
+  "snapshot": "VKGPX45BPEQJMVZZXZEG",
+  "bucket": "earthmover-icechunk-era5",
+  "prefix": "icechunkV2",
+  "group": "single/temporal",
+  "variables": [
+    "t2m",
+    "tp",
+    "u10",
+    "v10"
+  ],
+  "segments": 3,
+  "counts": {
+    "rows": 42,
+    "temperature_2m_mean": 0,
+    "precipitation_sum": 0,
+    "wind_speed_10m_mean": 0,
+    "wind_speed_10m_max": 0,
+    "wind_direction_10m_dominant": 0,
+    "wind_direction_sin": 0,
+    "wind_direction_cos": 0,
+    "precipitation_previous_3d": 0,
+    "precipitation_previous_7d": 0
+  },
+  "date_range": [
+    "2010-01-01",
+    "2010-01-14"
+  ],
+  "source_utc_hour_range": [
+    0,
+    758231
+  ],
+  "blocks": 3,
+  "rules": [
+    "Células ERA5 de 0,25° mais próximas do início, centro geodésico e fim de cada trecho. Cada célula distinta tem o mesmo peso.",
+    "Fuso IANA encontrado no centro, com busca de terra próxima quando o centro está no mar; último recurso é o fuso náutico.",
+    "Temperatura em °C, chuva total em mm e vento em km/h. Calcular médias horárias espaciais antes dos resumos diários.",
+    "Velocidade vem de √(u² + v²) em cada célula. Direção meteorológica vem do vetor médio diário, com seno e cosseno derivados.",
+    "A chuva etiquetada em t abrange a hora anterior. Atribuí-la pelo ponto médio do intervalo, inclusive em fusos fracionários.",
+    "Calcular chuva antecedente usando apenas os 3 ou 7 dias anteriores, com janela completa.",
+    "Campos ficam nulos quando faltam horas para a agregação. Horas nunca são preenchidas artificialmente."
+  ],
+  "inputs": [
+    {
+      "path": "Data/02_segmentacao/v005/gsaf_segmentos_25km_v005.geojson.gz",
+      "sha256": "af31e3dac0c4de60dd3789ee4d27985dc1444dbe0cdf95ed83da1ff3a7dd5bac"
+    },
+    {
+      "path": "Data/03_painel_diario/v006/gsaf_painel_diario_25km_v006.parquet",
+      "sha256": "355b04944198e7d008b63ada01190562a42379e8ae693d91e63948604b4155b0"
+    },
+    {
+      "path": "Scripts/build_climate_panel.py",
+      "sha256": "35695024052063f31f22bf1de2cf7ff8e7addb3f53ba1385b86d0b2bd25aaba0"
+    }
+  ],
+  "products": [
+    {
+      "file": "gsaf_clima_diario_25km_v007.parquet",
+      "sha256": "3c4caec63591ad52ea8de1820bb462ff899f17f0a744907d3f8ad8216440a279"
+    },
+    {
+      "file": "gsaf_clima_grade_25km_v007.csv",
+      "sha256": "cb859f2502c2e5f6ba49cd0ab6ea0dc1ee012ce351c080dbc700a9b7e448f4b4"
+    },
+    {
+      "file": "gsaf_clima_25km_relatorio_v007.md",
+      "sha256": "c5fae21f277bfc02e3fed77c19dc605de394a345857fb540ca42dbc2582447d6"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+﻿segment_id,timezone,timezone_method,point,point_lat,point_lon,era5_lat,era5_lon
+C00139-25-3333,America/Recife,center,start,-7.978268,-34.82852,-8.0,-34.75
+C00139-25-3333,America/Recife,center,center,-8.067953,-34.86911,-8.0,-34.75
+C00139-25-3333,America/Recife,center,end,-8.06438,-34.900588,-8.0,-35.0
+C00139-25-5150,America/Los_Angeles,center,start,39.241649,-123.783081,39.25,-123.75
+C00139-25-5150,America/Los_Angeles,center,center,39.342507,-123.821008,39.25,-123.75
+C00139-25-5150,America/Los_Angeles,center,end,39.453415,-123.812893,39.5,-123.75
+C04962-25-0001,Australia/Perth,center,start,-32.021834,115.440142,-32.0,115.5
+C04962-25-0001,Australia/Perth,center,center,-32.003185,115.547507,-32.0,115.5
+C04962-25-0001,Australia/Perth,center,end,-32.021834,115.440142,-32.0,115.5

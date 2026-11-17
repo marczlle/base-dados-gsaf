@@ -1,0 +1,77 @@
+{
+  "version": "v001",
+  "rules_version": "1.0.0",
+  "as_of": "2026-10-23",
+  "script_sha256": "aa167fefc4c338f39157bbb80b121a0dbb10d792fe698508fd4dc321ce29e88a",
+  "sources": [
+    {
+      "path": "GSAF_clima_lua.csv",
+      "rows": 5253,
+      "sha256": "ee2adcba9803fc3e2f7277ac49abdf0a059db097136d6d9fe1fce93ccc612b75"
+    },
+    {
+      "path": "Old Data/Md/GSAF5_ml_ready_final.csv",
+      "rows": 7097,
+      "sha256": "5ddabae8839cf7ef1537a301b9c10f2249d0b900cc6a744f85df9deb222c5a1c"
+    }
+  ],
+  "counts": {
+    "input": 5253,
+    "removed_duplicates": 3,
+    "clean": 5250,
+    "exact_date_events": 4741,
+    "non_exact_date_events": 509,
+    "local_day_events": 4549,
+    "positive_local_days": 4438
+  },
+  "date_status_counts": {
+    "exact": 4741,
+    "ambiguous_numeric": 31,
+    "year_conflict": 19,
+    "reported_date": 223,
+    "day_unknown": 232,
+    "range_or_approximate": 4
+  },
+  "validation": "passed",
+  "outputs": [
+    {
+      "path": "gsaf_limpa_v001.csv",
+      "rows": 5250,
+      "sha256": "86b176f9228132948044610b7f4177c71a99a7daee42fda948b4dcd11c5478dd"
+    },
+    {
+      "path": "gsaf_eventos_data_exata_v001.csv",
+      "rows": 4741,
+      "sha256": "fb4fed0fd45615f6bce34df83944f21d5c90ca5724dd672f265909d994e27862"
+    },
+    {
+      "path": "gsaf_datas_nao_exatas_v001.csv",
+      "rows": 509,
+      "sha256": "9191a3de0a909d39985b1f107c8867e0f88fdcee4ce43d18854f7815bc0a190f"
+    },
+    {
+      "path": "gsaf_dias_positivos_local_v001.csv",
+      "rows": 4438,
+      "sha256": "77ff1e4b39e03464d716e652cec259cd6c4763fc23a1fbde05ff36548422ff90"
+    },
+    {
+      "path": "gsaf_auditoria_v001.csv",
+      "rows": 5253,
+      "sha256": "b99d8fdd066bece8092dcebaa6a9ee3c27f501a7f84a7a2546e95e42993ff1eb"
+    },
+    {
+      "path": "gsaf_duplicidades_v001.csv",
+      "rows": 45,
+      "sha256": "a64d23dea64b28a756572b92ac03263a4d889aae8f41e368468d4b21a4749eef"
+    },
+    {
+      "path": "gsaf_normalizacoes_v001.csv",
+      "rows": 4624,
+      "sha256": "3283f01032ed2d734713ef9e7d1d063770c141f95c435782d010dd8141fc4857"
+    },
+    {
+      "path": "gsaf_qualidade_v001.md",
+      "sha256": "4970e5c5b25e625620840f4625c311b91db83eaa98360aa35e05c2415490c534"
+    }
+  ]
+}

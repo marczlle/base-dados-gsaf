@@ -1,0 +1,209 @@
+{
+  "version": "v004",
+  "as_of": "2026-11-05",
+  "sources": [
+    {
+      "file": "gsaf_eventos_modelagem_v003.csv",
+      "sha256": "86e4ebbcc63e63e42bb41ddfd6ab7b7c5779cb60c889f9787ea7080b94fc4686"
+    },
+    {
+      "file": "natural_earth_coastline_10m_v004.zip",
+      "sha256": "bfa04cdbcbef07ef90dfca1dabb48062eca29900a113df0f389303e255484017",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_coastline.zip",
+      "source_version": "4.1.0"
+    },
+    {
+      "file": "natural_earth_minor_islands_coastline_10m_v004.zip",
+      "sha256": "fa1d68b486b3a3ea2f625517d54b36d7544880b388170891b53a065e826ebd3e",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_physical/ne_10m_minor_islands_coastline.zip",
+      "source_version": "4.1.0"
+    },
+    {
+      "file": "natural_earth_admin0_map_units_10m_v004.zip",
+      "sha256": "45bebe2aaf8bf42b9daf4428594925bcb11eabd32fe9dc6e0acf681438053eb5",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_0_map_units.zip",
+      "source_version": "5.1.1"
+    }
+  ],
+  "script_sha256": "9dec774bf314cff7127727210dc45d19a265257dd32023cfb9fca92d70c7c077",
+  "rules": {
+    "max_distance_km": 25,
+    "country_tolerance_km": 10,
+    "geodesy": "great-circle arcs on sphere with mean radius 6371.0088 km",
+    "segment_sizes_km": [
+      10,
+      25,
+      50
+    ],
+    "adaptive_max_segments": 4,
+    "adaptive_min_distinct_days": 10,
+    "adaptive_only_scale_km": 25,
+    "country_unverified": "review_only",
+    "country_aliases": {
+      "ANDAMAN / NICOBAR ISLANDAS": [
+        "INDIA"
+      ],
+      "ANTIGUA": [
+        "ANTIGUA AND BARBUDA"
+      ],
+      "AZORES": [
+        "PORTUGAL"
+      ],
+      "BRITISH ISLES": [
+        "UNITED KINGDOM",
+        "IRELAND",
+        "ISLE OF MAN"
+      ],
+      "CAPE VERDE": [
+        "CABO VERDE"
+      ],
+      "DIEGO GARCIA": [
+        "BRITISH INDIAN OCEAN TERRITORY"
+      ],
+      "EGYPT / ISRAEL": [
+        "EGYPT",
+        "ISRAEL"
+      ],
+      "IRAN / IRAQ": [
+        "IRAN",
+        "IRAQ"
+      ],
+      "JOHNSTON ISLAND": [
+        "JOHNSTON ATOLL"
+      ],
+      "MICRONESIA": [
+        "FEDERATED STATES OF MICRONESIA",
+        "MICRONESIA"
+      ],
+      "NETHERLANDS ANTILLES": [
+        "CURACAO",
+        "BONAIRE",
+        "SINT MAARTEN",
+        "SABA",
+        "SINT EUSTATIUS"
+      ],
+      "NEW GUINEA": [
+        "PAPUA NEW GUINEA",
+        "INDONESIA"
+      ],
+      "PALESTINIAN TERRITORIES": [
+        "PALESTINE",
+        "GAZA"
+      ],
+      "SAINT KITTS AND NEVIS": [
+        "SAINT KITTS AND NEVIS",
+        "ST KITTS AND NEVIS"
+      ],
+      "SAINT MARTIN": [
+        "SAINT MARTIN",
+        "ST MARTIN"
+      ],
+      "SOLOMON ISLANDS / VANUATU": [
+        "SOLOMON ISLANDS",
+        "VANUATU"
+      ],
+      "ST HELENA, BRITISH OVERSEAS TERRITORY": [
+        "SAINT HELENA",
+        "ST HELENA",
+        "ASCENSION"
+      ],
+      "TURKEY": [
+        "TURKEY",
+        "TURKIYE"
+      ],
+      "US VIRGIN ISLANDS": [
+        "US VIRGIN ISLANDS",
+        "UNITED STATES VIRGIN ISLANDS",
+        "VIRGIN ISLANDS U S"
+      ],
+      "USA": [
+        "USA",
+        "UNITED STATES OF AMERICA",
+        "UNITED STATES"
+      ]
+    },
+    "limit_sensitivity_without_country_check": {
+      "10": 4310,
+      "25": 4551,
+      "50": 4673
+    }
+  },
+  "events": 4964,
+  "status_counts": {
+    "assigned": 4434,
+    "outside_distance": 311,
+    "country_mismatch": 86,
+    "no_coordinates": 102,
+    "country_unverified": 31
+  },
+  "scales": {
+    "10": {
+      "segments": 98003,
+      "active_segments": 1637
+    },
+    "25": {
+      "segments": 41735,
+      "active_segments": 1281
+    },
+    "50": {
+      "segments": 23376,
+      "active_segments": 1038
+    }
+  },
+  "chains": 6836,
+  "adaptive_regions": 884,
+  "eligible_regions": 142,
+  "events_in_eligible_regions": 2580,
+  "products": [
+    {
+      "file": "atlas_indice_v004.json",
+      "sha256": "7640b738d8e975f7a102584fb02078cf2791523089a42cd6ac8ada401cd844da",
+      "bytes": 956577
+    },
+    {
+      "file": "gsaf_eventos_segmentos_v004.csv",
+      "sha256": "ac49cbe433c4e8974eced1f47463addc14f83d1c203fbcd0c827a7a11cb0b42c",
+      "bytes": 2122822
+    },
+    {
+      "file": "gsaf_regioes_adaptativas_v004.csv",
+      "sha256": "05a7337a72119bee0ec6e5016feb57ef47b227760c63017fbd6dc5710dbae321",
+      "bytes": 46412
+    },
+    {
+      "file": "gsaf_segmentacao_relatorio_v004.md",
+      "sha256": "68a0ff080e76e9e00b3660fd4a3151beb650dc28d6e2031e8d7b755381c536f0",
+      "bytes": 2366
+    },
+    {
+      "file": "atlas_segmentos_10km_v004.json",
+      "sha256": "4e56e5f46313dd6e35db0d5326921f1f796b5f65af12d96752b3787775746964",
+      "bytes": 30314214
+    },
+    {
+      "file": "gsaf_segmentos_10km_v004.geojson.gz",
+      "sha256": "a2fa063c1168b78bf2b26a4edea98d028511bd829325f3683c44ee58dea932a6",
+      "bytes": 5899867
+    },
+    {
+      "file": "atlas_segmentos_25km_v004.json",
+      "sha256": "a7df279bfeec1eb6a5176c704a51ea14b6cdcdacf6d9881372463a5f7db6d0e9",
+      "bytes": 19489999
+    },
+    {
+      "file": "gsaf_segmentos_25km_v004.geojson.gz",
+      "sha256": "5992558f1fcaee4bd6bac5bf2a6dbde1b17e0d5f4d25b69c2a0c54e08a381082",
+      "bytes": 4707778
+    },
+    {
+      "file": "atlas_segmentos_50km_v004.json",
+      "sha256": "151dfb40cd820f8bd8ec6b55fcf847a5b0b0a38a268a92bb17a382e7b8bf0bd1",
+      "bytes": 15788558
+    },
+    {
+      "file": "gsaf_segmentos_50km_v004.geojson.gz",
+      "sha256": "155626bfdd01f0b179b126f1001c2d1409c7457e0658f81bf0c924d3604bd52d",
+      "bytes": 4268237
+    }
+  ]
+}

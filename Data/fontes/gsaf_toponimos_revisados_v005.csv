@@ -1,0 +1,9 @@
+country,state,location,coast_id,max_distance_km,source_url,note
+USA,CALIFORNIA,FARALLON ISLANDS,C00642,10,https://www.fws.gov/refuge/farallon-islands/about-us,Trecho insular disponível como referência do arquipélago de Farallon.
+USA,CALIFORNIA,"NORTH FARALLON ISLAND, FARALLON ISLANDS",C00642,10,https://wildlife.ca.gov/Conservation/Marine/MPAs/North-Farallon-Islands,Trecho disponível no arquipélago; a geometria não distingue o local exato na ilha norte.
+USA,CALIFORNIA,SOUTHEAST FARALLON ISLAND,C00642,10,https://wildlife.ca.gov/Conservation/Marine/MPAs/Southeast-Farallon-Island,Ilha e jurisdição confirmadas; o trecho é uma referência.
+USA,CALIFORNIA,"SOUTHEAST FARALLON ISLAND, FARALLON ISLANDS",C00642,10,https://wildlife.ca.gov/Conservation/Marine/MPAs/Southeast-Farallon-Island,Ilha e jurisdição confirmadas; o trecho é uma referência.
+AUSTRALIA,QUEENSLAND,HUMPY ISLAND GREAT KEPPEL ISLAND,C06423,5,https://parks.qld.gov.au/parks/keppel-bay-islands/things-to-do,Trecho disponível como referência do grupo de Keppel Bay.
+AUSTRALIA,QUEENSLAND,GREAT KEPPEL ISLAND,C06423,5,https://parks.qld.gov.au/parks/keppel-bay-islands/things-to-do,Ilha e jurisdição confirmadas; o trecho é uma referência.
+AUSTRALIA,QUEENSLAND,MIALL ISLAND,C06423,5,https://parks.qld.gov.au/parks/keppel-bay-islands/things-to-do,Trecho disponível como referência do grupo de Keppel Bay.
+AUSTRALIA,QUEENSLAND,LIZARD ISLAND,C06311,5,https://parks.qld.gov.au/parks/lizard-island,Ilha e jurisdição confirmadas; o trecho é uma referência.

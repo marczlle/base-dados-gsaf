@@ -1,0 +1,5 @@
+# Ambiente usado para gerar a etapa 2 v004 (Python 3.13).
+numpy==2.2.6
+scipy==1.15.3
+shapely==2.2.0
+pyshp==3.1.6

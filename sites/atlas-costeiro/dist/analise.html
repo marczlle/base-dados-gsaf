@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081522">
+  <meta name="description" content="Explore o clima e a fase lunar nos dias com ataques de tubarão registrados no GSAF.">
+  <meta name="analysis-data" content="./data/atlas_analise_v010.json">
+  <meta name="comparison-data" content="./data/atlas_comparacao_v011.json">
+  <title>Clima e Lua · Atlas Costeiro</title>
+  <link rel="stylesheet" href="./styles.css?v=v005">
+  <link rel="stylesheet" href="./analise.css?v=v011">
+  <script src="./analise.js?v=v011" defer></script>
+</head>
+<body class="research">
+  <a class="skip" href="#filtros">Pular para os filtros</a>
+  <header class="topbar">
+    <div class="top-inner">
+      <a href="./" class="brand" aria-label="Atlas Costeiro, início">
+        <span class="brand-icon"><svg aria-hidden="true" class="icon" viewBox="0 0 24 24"><path d="M2.5 12c3.5 0 3.5-5 7-5s3.5 5 7 5 3.5-5 5-5M2.5 17c3.5 0 3.5-5 7-5s3.5 5 7 5 3.5-5 5-5"/></svg></span>
+        <span><strong>Atlas Costeiro</strong><small>GSAF <span>·</span> Pesquisa espacial</small></span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a class="nav-link" href="./#explorar">Explorador</a>
+        <a class="nav-current" href="./analise.html" aria-current="page">Clima e Lua</a>
+      </nav>
+      <a class="version report-link" href="#metodologia"><i></i>Como ler os dados</a>
+    </div>
+  </header>
+
+  <main class="shell research-shell">
+    <section class="research-hero" aria-labelledby="page-title">
+      <div>
+        <p class="research-overline"><i></i> GSAF <span></span> ERA5</p>
+        <h1 id="page-title">Clima e Lua <em>nos dias de ataque</em></h1>
+        <p>Explore os registros históricos por período e país e conheça as condições ambientais associadas a cada recorte.</p>
+      </div>
+      <div class="lunar-orbit" aria-hidden="true"><i></i><i></i><span></span><b></b></div>
+    </section>
+
+    <form class="research-filters" id="filtros" aria-label="Filtros da análise">
+      <div class="filter-field country-field"><label for="by-country">País ou área</label><select id="by-country" disabled><option value="">Todos</option></select></div>
+      <div class="filter-field"><label for="from-date">De</label><input id="from-date" type="date" disabled></div>
+      <div class="filter-field"><label for="to-date">Até</label><input id="to-date" type="date" disabled></div>
+      <div class="filter-field"><label for="group-by">Agrupar por</label><select id="group-by" disabled><option value="year">Ano</option><option value="decade">Década</option><option value="month">Mês</option></select></div>
+      <label class="reported"><input id="exclude-reported" type="checkbox" disabled> Somente datas exatas</label>
+      <button class="research-button" id="reset-filters" type="button" disabled>Limpar filtros</button>
+      <p id="filter-error" class="filter-error" role="alert" hidden></p>
+    </form>
+
+    <p id="load-state" class="research-status" role="status">Carregando a análise…</p>
+
+    <div id="research-results" hidden>
+      <section class="research-metrics" aria-label="Resumo do recorte">
+        <div class="research-metric"><span>Ataques registrados</span><strong id="total">—</strong><small id="total-context">—</small></div>
+        <div class="research-metric"><span>Temperatura média do ar</span><strong id="temperature">—</strong><small id="temperature-n">—</small></div>
+        <div class="research-metric"><span>Precipitação média</span><strong id="precipitation">—</strong><small id="precipitation-n">—</small></div>
+        <div class="research-metric moon-metric"><span>Iluminação lunar média</span><strong id="illumination">—</strong><small id="illumination-n">—</small></div>
+      </section>
+
+      <div class="research-panels">
+        <section class="research-panel span-all" aria-labelledby="attacks-title">
+          <header class="research-panel-head">
+            <div><h2 id="attacks-title">Ataques ao longo do tempo</h2><p>Contagem de registros por período</p></div>
+            <span class="chart-key"><i></i>Ataques</span>
+          </header>
+          <div id="attacks-chart" class="plot"></div>
+        </section>
+
+        <section class="research-panel" aria-labelledby="averages-title">
+          <header class="research-panel-head">
+            <div><h2 id="averages-title">Médias com e sem registro de ataque</h2><p>Uma observação por trecho de 25 km e dia</p></div>
+            <select id="average-metric" aria-label="Variável da média">
+              <option value="temperature_2m_mean">Temperatura do ar</option><option value="precipitation_sum">Precipitação diária</option><option value="wind_speed_10m_mean">Vento médio</option><option value="wind_speed_10m_max">Vento máximo</option><option value="precipitation_previous_3d">Chuva anterior · 3 dias</option><option value="precipitation_previous_7d">Chuva anterior · 7 dias</option><option value="moon_illumination">Iluminação lunar</option>
+            </select>
+          </header>
+          <div class="comparison-legend" aria-label="Legenda da comparação">
+            <span><i id="with-key"></i> Com ataque registrado</span>
+            <span><i class="without-key"></i> Sem registro de ataque</span>
+          </div>
+          <div id="averages-chart" class="plot"></div>
+        </section>
+
+        <section class="research-panel" aria-labelledby="phases-title">
+          <header class="research-panel-head"><div><h2 id="phases-title">Ataques por fase lunar</h2><p id="phase-coverage">—</p></div></header>
+          <div id="phases-chart" class="rank-chart"></div>
+        </section>
+
+        <section class="research-panel span-all" aria-labelledby="country-title">
+          <header class="research-panel-head"><div><h2 id="country-title">Ataques por país ou área</h2><p id="country-coverage">—</p></div></header>
+          <div id="countries-chart" class="rank-chart country-rank"></div>
+        </section>
+      </div>
+    </div>
+
+    <details class="research-method" id="metodologia">
+      <summary>Como ler os dados</summary>
+      <p>O total e os indicadores superiores usam ocorrências individuais. No gráfico comparativo, cada trecho e dia contam uma vez. No filtro por país ou área, são considerados os trechos com ataques atribuídos ao rótulo selecionado, dentro das janelas do painel entre o primeiro e o último ataque registrado em cada trecho.</p>
+      <p>O clima ERA5 vem do segmento costeiro de 25 km e do dia local. A Lua é calculada às 12h UTC para a data do calendário. Se faltar associação espacial ou um valor na fonte, o registro continua no total e a média usa apenas os registros disponíveis.</p>
+      <p>As datas <i>Reported</i> usam o dia de publicação ou registro como aproximação. Com o filtro de datas exatas ativo, um dia com registro apenas <i>Reported</i> fica fora da linha de ataques e permanece excluído dos dias sem registro. A comparação é descritiva e depende da cobertura histórica e dos trechos incluídos.</p>
+      <p class="source-links"><a href="https://www.sharkattackfile.net/">GSAF</a> · <a href="https://registry.opendata.aws/earthmover-era5/">ERA5</a> · <a href="https://rhodesmill.org/pyephem/">PyEphem</a><span id="source-versions"></span></p>
+    </details>
+    <footer class="research-footer"><span>Atlas Costeiro · GSAF</span><a href="./#explorar">Voltar ao mapa</a></footer>
+  </main>
+</body>
+</html>

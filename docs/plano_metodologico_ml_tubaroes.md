@@ -38,7 +38,7 @@ Atualmente, o script realiza uma consulta por registro, usando a mesma data em `
 
 O script `moon.py` utiliza `ephem` para calcular `moon_illumination` e `moon_phase`. Como esses valores dependem essencialmente da data, o cálculo poderá ser feito uma única vez para cada dia do calendário e depois associado a todos os segmentos costeiros.
 
-Há um problema importante nas datas incompletas: `enrich_data.py` usa o dia 1 para consultar a Open-Meteo quando o dia original é desconhecido, enquanto `moon.py` usa o dia 15 para calcular a lua. Essa aproximação não será utilizada na variável-alvo diária. Registros sem dia exato serão excluídos do treinamento diário ou analisados separadamente em uma versão mensal.
+Há um problema importante nas datas incompletas: `enrich_data.py` usa o dia 1 para consultar a Open-Meteo quando o dia original é desconhecido, enquanto `moon.py` usa o dia 15 para calcular a lua. Essa imputação não será utilizada na variável-alvo diária. Registros sem dia conhecido serão excluídos do treinamento diário ou analisados separadamente em uma versão mensal. Por decisão do pesquisador em 23/10/2026, datas de registro/notícia (`Reported`) são elegíveis como aproximação do dia do ataque, com identificação explícita dessa condição.
 
 ## 3. Evolução da ideia
 
@@ -226,10 +226,92 @@ Procedimentos:
 - separar datas exatas de registros com dia desconhecido;
 - normalizar latitude e longitude;
 - identificar ataques duplicados ou múltiplos no mesmo dia;
-- utilizar apenas dias positivos com data exata no modelo diário;
+- utilizar dias positivos com data exata ou data `Reported` aceita como aproximação no modelo diário;
 - produzir um relatório de qualidade com linhas removidas e motivos.
 
 Registros com dia desconhecido não receberão artificialmente o dia 1 ou 15 na variável-alvo.
+Datas `Reported` são aceitas sob a hipótese de que o intervalo entre ataque e notícia
+seja pequeno. Esse intervalo não foi medido. A flag de aproximação será preservada
+para permitir comparação posterior com um recorte restrito às datas exatas.
+
+#### Execução da etapa 1 — versão v001 (23/10/2026)
+
+A implementação reproduzível está em `scripts/clean_data.py`. A fonte inicial foi
+preservada. Os resultados estão em `Data/`, sempre com sufixo de versão sequencial
+compartilhado por execução. Novas execuções escolhem a próxima versão livre e não
+sobrescrevem resultados anteriores.
+
+- `gsaf_limpa_v001.csv`: 5.250 registros, após remover 3 duplicações comprovadas.
+- `gsaf_eventos_data_exata_v001.csv`: 4.741 registros com data exata confirmada.
+- `gsaf_datas_nao_exatas_v001.csv`: 509 registros retidos sem data exata confirmada.
+- `gsaf_dias_positivos_local_v001.csv`: 4.438 pares positivos de localidade e data,
+  reunindo 4.549 registros com data exata, localidade, país e coordenadas numéricas.
+- `gsaf_qualidade_v001.md`, `gsaf_auditoria_v001.csv` e arquivos de evidências,
+  normalizações e manifesto: regras, exclusões, contagens e rastreabilidade.
+
+A conferência do arquivo anterior em `Old Data/Md` permitiu distinguir vítimas
+diferentes de duplicações reais e separar datas de notícia (`Reported`), datas
+numéricas ambíguas e conflitos de ano. A ausência de dia não é a única razão para
+uma data ficar fora do modelo diário. Os campos brutos foram preservados, e o
+enriquecimento climático/lunar foi esvaziado nos registros sem data exata.
+
+O resumo por localidade é provisório: a unidade principal permanece **segmento
+costeiro + data**. Coordenadas numericamente válidas ainda precisam de validação
+espacial, e a seleção de tipos de incidente deve ser definida antes do treinamento.
+O clima e a lua antigos não substituem o enriquecimento padronizado das etapas 4 e 5.
+
+#### Atualização da etapa 1 — versão v002 (23/10/2026)
+
+A política atual inclui os 223 registros com `date_status=reported_date` e data
+completa válida no recorte diário. A hipótese é tratar o dia de registro como
+aproximação do dia do ataque, sem afirmar que o intervalo foi observado ou medido.
+Esses registros mantêm `date_is_approximate=1`. Datas exatas mantêm a flag igual a 0.
+A fonte inicial foi arquivada em `Old Data/GSAF_clima_lua.csv`; esse é o caminho
+padrão atualizado do script, com o mesmo conteúdo usado na v001.
+
+O arquivo elegível passa a se chamar `gsaf_eventos_diarios_v002.csv`, pois inclui
+datas exatas e aproximadas. Os registros ainda inelegíveis ficam em
+`gsaf_datas_inelegiveis_v002.csv`. O resumo por localidade e dia inclui as contagens
+`exact_attack_count` e `reported_attack_count`, além da flag `has_reported_date`.
+Os produtos v001 são preservados como histórico da política anterior.
+
+A v002 contém 4.964 registros elegíveis pela data (4.741 exatos e 223 Reported),
+286 registros com data ainda inelegível e 4.611 pares positivos de localidade/data,
+que agregam 4.723 registros com os requisitos geográficos preenchidos. A base
+completa retida continua com 5.250 registros.
+
+Dia desconhecido, formatos numéricos ambíguos, intervalos explícitos e conflitos de
+ano continuam excluídos. O enriquecimento antigo dos registros Reported elegíveis
+é preservado para o dia adotado como aproximação. As mesmas exigências geográficas
+continuam valendo para o agrupamento por localidade. As flags e contagens do próprio
+dia servem à auditoria e não serão usadas como preditores.
+
+#### Entrada enxuta da modelagem — versão v003 (23/10/2026)
+
+O arquivo de partida da etapa espacial é `Data/01_limpeza/v003/gsaf_eventos_modelagem_v003.csv`.
+O script agora localiza a única fonte `GSAF_clima_lua.csv` no projeto, atualmente
+em `Old Data/Md`, acompanhando sua reorganização sem alterar seu conteúdo.
+Ele preserva os 4.964 eventos com data elegível, com data, país, estado, localidade,
+latitude, longitude, identificador e flags de precisão temporal e qualidade espacial.
+Não contém hora, espécie, tamanho do tubarão, atividade nem cópias dos valores brutos.
+São 4.862 registros com coordenadas numericamente válidas e 102 sem par válido,
+sinalizados para recuperar coordenadas. Os 139 registros sem nome de localidade
+mas com coordenadas válidas são mantidos para a atribuição aos segmentos.
+
+O resumo provisório por localidade exige país e localidade preenchidos e coordenadas
+válidas. Entre os 4.964 eventos com data elegível, 241 não entram nesse resumo:
+237 sem localidade, 102 sem coordenadas e 9 sem país, com sobreposição entre motivos.
+Os 4.723 eventos representados no resumo se agregam em 4.611 pares localidade/data.
+A diferença de 112 linhas é agregação de múltiplos registros, preservados em
+`attack_count`. Essas exigências textuais do resumo não filtram a entrada enxuta.
+
+A tabela de eventos ainda não é a base final de treinamento. Ela alimentará a
+atribuição aos segmentos e a criação de uma linha por `segment_id + date`, com
+alvo `attack` igual a 0 ou 1, coordenadas do segmento, clima regional, lua e
+sazonalidade. O enriquecimento antigo por ponto de ataque permanece na base completa
+para rastreabilidade, sem substituir o processamento uniforme das etapas 4 e 5.
+IDs, nomes, flags de qualidade e contagens do próprio dia não são automaticamente
+preditores. A versão v003 não muda as regras temporais nem remove novos eventos.
 
 ### Etapa 2 — Construção dos segmentos costeiros
 
@@ -249,7 +331,91 @@ A segmentação-base deverá ser geométrica e independente dos ataques. O mapa 
 
 A união adaptativa será usada somente quando um segmento tiver poucos dias positivos. A regra inicial será unir segmentos costeiros vizinhos até obter pelo menos 10 dias positivos distintos, sem ultrapassar quatro segmentos-base. Regiões que continuarem com poucos dados serão mantidas no mapa, mas excluídas do modelo principal.
 
+#### Atlas da etapa 2 — versão v004 (05/11/2026)
+
+O **Atlas Costeiro** é a interface de inspeção dos resultados desta etapa. O mapa
+permite comparar os recortes de 10, 25 e 50 km, buscar segmentos e eventos e
+inspecionar a distância e a decisão de atribuição. A animação percorre os anos
+dos registros; ela não estima risco nem representa observação contínua da costa.
+A [versão publicada do atlas](https://atlas-costeiro-gsaf.mysticcake16.chatgpt.site)
+é privada e requer login com a conta proprietária.
+
+A geometria de análise usa a linha costeira e as ilhas menores do
+[Natural Earth 1:10 milhões](https://www.naturalearthdata.com/downloads/10m-physical-vectors/).
+O [mapa-base 1:110 milhões](https://www.naturalearthdata.com/downloads/110m-physical-vectors/)
+é apenas visual. Os comprimentos de segmento (10/25/50 km) e o limite operacional
+de atribuição (25 km) têm funções diferentes: um controla como a linha é
+dividida; o outro controla quão distante dela um registro pode estar. O limite
+não é uma medida de precisão da geocodificação e deve ser reavaliado na análise
+de sensibilidade. A compatibilidade geográfica também é verificada para não
+aceitar automaticamente um ponto próximo à costa de outro país.
+
+O inventário mantém os 4.964 eventos elegíveis pela data, inclusive os 102 sem
+coordenadas e os 223 com data `Reported`. A falta de topônimo não impede uma
+atribuição quando as demais verificações permitem usar o ponto. Registros sem
+atribuição permanecem na correspondência com sua situação, para revisão. O
+resultado desta etapa contém registros positivos e segmentos; os dias sem
+registro, o clima regional e as variáveis lunares do painel vêm nas etapas seguintes.
+
+O recorte de 25 km tem 41.735 segmentos; os recortes de 10 e 50 km têm 98.003 e
+23.376. Foram atribuídos 4.434 eventos. Entre os 530 sem atribuição, 102 estão
+sem coordenadas, 311 estão além do limite, 86 têm incompatibilidade de país e
+31 precisam de revisão do país ou território. Das 884 regiões adaptativas com
+eventos, 142 atendem ao mínimo de dez datas distintas; elas contêm 2.580 registros.
+
+O relatório `Data/historico/02_segmentacao/v004/gsaf_segmentacao_relatorio_v004.md` documenta as fontes,
+os controles de distância e os resultados. A correspondência por evento e
+escala está em `Data/historico/02_segmentacao/v004/gsaf_eventos_segmentos_v004.csv`.
+As regiões adaptativas e as geometrias `gsaf_segmentos_{10,25,50}km_v004.geojson.gz`
+estão na mesma pasta.
+
+#### Revisão da atribuição costeira — v005 (05/11/2026)
+
+O geocodificador original consultava combinações de localidade, estado e país
+e podia recorrer apenas a estado e país. A coordenada resultante representa
+uma referência geográfica aproximada. A distância calculada até a costa é
+a distância a partir dessa referência, e não a distância medida do ataque.
+
+O caso Farallon revelou uma limitação da regra anterior: a linha costeira
+representa o arquipélago, mas o polígono administrativo usado para conferir o
+país não inclui essas ilhas. A associação é recuperada pelo topônimo e pela
+confirmação do [U.S. Fish & Wildlife Service](https://www.fws.gov/refuge/farallon-islands/about-us).
+Para registros que citam o arquipélago ou uma ilha que a geometria não distingue,
+o trecho disponível é uma aproximação. As coordenadas originais não são alteradas.
+
+O recorte revisado mantém o critério de 25 km para vínculos padrão e permite
+vínculos provisórios até 75 km quando há contexto costeiro específico e
+compatibilidade geográfica. Exceções e territórios são verificados dentro do
+contexto informado. Uma distância maior, por si só, não confirma nem invalida
+um registro. O método fica identificado para comparação futura entre o recorte
+estrito e o recorte que inclui as aproximações recuperadas.
+
+Foram recuperadas 54 associações sem remover vínculos da v004: 31 por revisão
+de topônimo ou território (incluindo os oito registros de Farallon) e 23 pela
+distância ampliada. A v005 tem 4.488 registros associados e 476 pendentes.
+As escalas permanecem 10, 25 e 50 km; as regiões adaptativas passam a 903,
+das quais 144 alcançam o mínimo de dez datas positivas distintas. Os arquivos
+`Data/02_segmentacao/v005/gsaf_segmentacao_relatorio_v005.md` e `Data/02_segmentacao/v005/gsaf_segmentacao_transicoes_v005.csv`
+registram as regras e as decisões por evento.
+
+Para abrir uma cópia local da versão atual do atlas, execute na raiz do projeto:
+
+```powershell
+python Scripts/preparar_atlas.py --version v005 --serve
+```
+
+O servidor imprime `http://127.0.0.1:8765/`. A interface recebe apenas as projeções
+cartográficas versionadas e não requer acesso ao CSV bruto no navegador.
+
+Para reproduzir a segmentação, instale as dependências fixadas em
+`Scripts/requirements-segmentacao.txt` e execute `Scripts/segment_coast.py` com
+`--as-of` (data ISO), `--source-version v004` e uma nova `--version`. As versões
+anteriores permanecem preservadas. Os manifestos em `Data/` registram os hashes das
+fontes, dos resultados e dos arquivos usados pela página.
+
 ### Etapa 3 — Construção do painel diário
+
+O painel de 25 km v006 e seu relatório estão em [Data/03_painel_diario/v006](../Data/03_painel_diario/v006/).
 
 Usar uma janela ativa individual para cada segmento:
 
@@ -292,12 +458,19 @@ Não serão criados dias negativos para segmentos sem nenhum ataque registrado, 
 
 ### Etapa 4 — Clima regional
 
-O script atual consulta a Open-Meteo por coordenada e data individual. Para a base expandida, o processo deverá:
+A base expandida usa o ERA5 horário original do Copernicus, em um snapshot público
+do espelho Icechunk da Earthmover. `Scripts/build_climate_panel.py` extrai as células
+dos trechos do painel v006 e gera um Parquet em `Data/04_clima/`, acompanhado de mapa
+das células, relatório e manifesto. A [v008](../Data/04_clima/v008/) cobre o painel
+v006. O [piloto v007](../Data/historico/04_clima/v007/) avaliou Recife, Califórnia
+e a costa oeste da Austrália.
+
+O processo usa:
 
 - selecionar três pontos fixos por segmento, aproximadamente nos extremos e no centro;
-- consultar intervalos completos de datas;
+- consultar os blocos horários que intersectam os intervalos do painel, com margem para chuva antecedente;
 - usar cache;
-- agrupar chamadas por coordenada;
+- baixar uma vez cada bloco da grade e agrupar os três pontos pela célula selecionada;
 - evitar uma requisição por linha do painel;
 - registrar falhas, lacunas e pontos sem retorno.
 
@@ -308,28 +481,29 @@ Para cada segmento e data, calcular:
 - velocidade média do vento;
 - velocidade máxima do vento;
 - direção do vento convertida em componentes seno/cosseno;
-- desvio ou amplitude entre os pontos do segmento.
+- chuva acumulada nos 3 e 7 dias anteriores.
 
 A regra de agregação será igual para dias positivos e negativos. O clima não será consultado no ponto exato do ataque para os positivos e em um ponto arbitrário para os negativos.
 
-As variáveis atuais representam condições meteorológicas obtidas pela Open-Meteo. Elas não deverão ser descritas automaticamente como temperatura da água ou condições oceanográficas.
+O agrupamento diário usa o fuso local do trecho. A chuva horária corresponde à
+hora que termina no horário fornecido pelo ERA5. A temperatura representa a
+estimativa da reanálise para o ar a 2 m da superfície.
 
 ### Etapa 5 — Variáveis lunares e sazonais
 
-Usar `ephem` para calcular, uma única vez por data:
+O [calendário lunar v009](../Data/05_lua/v009/gsaf_calendario_lunar_v009.csv)
+cobre as 31.545 datas distintas do painel v006. `Scripts/build_lunar_calendar.py`
+usa o PyEphem para calcular as variáveis da Lua uma vez por data, às 12h UTC.
 
-- `moon_illumination`;
-- `moon_phase`.
+- `moon_illumination` guarda a fração iluminada.
+- `moon_phase_deg` guarda o ângulo da fase, com seno e cosseno para o modelo.
+- `moon_phase` rotula o setor de 45° mais próximo para inspeção.
+- `year` guarda o ano bruto. `day_of_year`, `day_of_year_sin` e
+  `day_of_year_cos` representam a posição no calendário com ajuste de ano bissexto.
 
-Adicionar:
-
-- seno e cosseno do dia do ano;
-- ano normalizado;
-- latitude do segmento;
-- longitude do segmento;
-- hemisfério ou bacia oceânica, caso a classificação seja obtida de forma confiável.
-
-A lua será vinculada por data a todos os segmentos. A primeira versão usará a data como referência comum; ajustes finos de fuso e horário ficarão fora do escopo inicial.
+A chave `date` vincula o calendário aos trechos. Latitude, longitude e eventual
+classificação de hemisfério ou bacia vêm da geometria dos segmentos na montagem
+da base de treino.
 
 ### Etapa 6 — Variáveis excluídas
 
@@ -460,8 +634,9 @@ O trabalho deverá declarar que:
 - União adaptativa: segmentos vizinhos com menos de 10 dias positivos, limitada a quatro segmentos-base.
 - Ataque positivo: pelo menos um registro no segmento e na data.
 - Dias com dia desconhecido: excluídos do alvo diário.
+- Datas Reported: elegíveis como aproximação do dia do ataque, com flag preservada.
 - Lua: calculada localmente, sem API.
-- Clima: Open-Meteo, consultada em lotes e com cache.
+- Clima: ERA5 horário via espelho Earthmover, extraído em blocos e com cache.
 - Pernambuco: avaliação externa de generalização, não conjunto principal de treinamento.
 - Modelo inicial: regressão logística regularizada e modelo de árvores.
 - Categorias baixa/média/alta: derivadas somente após calibração.
